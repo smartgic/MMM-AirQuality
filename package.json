@@ -1,0 +1,14 @@
+{
+  "name": "MMM-AirQuality",
+  "version": "1.0.0",
+  "description": "Collect MQ2 metrics",
+  "main": "MMM-AirQuality.js",
+  "author": "Smart'Gic",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "node-fetch": "latest"
+  }
+}

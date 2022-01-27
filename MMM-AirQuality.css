@@ -1,0 +1,30 @@
+/*
+ * Magic Mirror
+ * Module: MMM-AirQuality
+ *
+ * By Smart'Gic
+ * MIT Licensed.
+ */
+.MMM-AirQuality .symbol {
+    margin-right: 10px;
+}
+
+.MMM-AirQuality .symbol-alert {
+    color: #ff8e99;
+}
+
+.MMM-AirQuality .symbol-good {
+    color: #6dfc8b;
+}
+
+.MMM-AirQuality .alert {
+    font-size: 20px;
+    font-style: italic;
+    color: white;
+}
+
+.MMM-AirQuality .good {
+    font-size: 20px;
+    font-style: italic;
+    color: white;
+}
