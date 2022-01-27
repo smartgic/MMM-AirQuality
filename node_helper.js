@@ -12,21 +12,21 @@ module.exports = NodeHelper.create({
 
   userAgent: 'MMM-AirQuality',
 
-	start() {
-		console.log('MMM-AirQuality helper started');
-	},
+  start() {
+    console.log('MMM-AirQuality helper started');
+  },
 
-	getMetrics() {
-		const parent = this;
+  getMetrics() {
+    const parent = this;
     const mq2Url = this.config.abstractApiUrl + '/v1/gas/' + this.config.sensor
-		fetch(mq2Url, {
-			headers: {'Accept': 'application/json',
+    fetch(mq2Url, {
+      headers: {'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'User-Agent': this.userAgent}
-		})
-			.then(res => res.json())
-			.then(json => parent.sendSocketNotification('DATA_MQ2', json));
-	},
+    })
+      .then(res => res.json())
+      .then(json => parent.sendSocketNotification('DATA_MQ2', json));
+  },
 
   sendAlert() {
     let led = {
@@ -43,32 +43,32 @@ module.exports = NodeHelper.create({
     };
 
     const ledUrl = this.config.abstractApiUrl + '/v1/leds/led'
-		fetch(ledUrl, {
+    fetch(ledUrl, {
       method: 'POST',
       body: JSON.stringify(led),
-			headers: {'Accept': 'application/json',
+      headers: {'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'User-Agent': this.userAgent}
-		});
+    });
 
     const speechUrl = this.config.mycroftApiUrl + '/v1/voice/speech'
-		fetch(speechUrl, {
+    fetch(speechUrl, {
       method: 'POST',
       body: JSON.stringify(speech),
-			headers: {'Accept': 'application/json',
+      headers: {'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'User-Agent': this.userAgent,
                 'Authorization': 'Bearer ' + this.config.mycroftApiToken}
-		});
+    });
   },
 
-	socketNotificationReceived(notification, payload) {
-		if (notification == 'GET_MQ2') {
-			this.getMetrics();
-		} else if (notification == 'INIT_MQ2') {
-    	this.config = payload;
+  socketNotificationReceived(notification, payload) {
+    if (notification == 'GET_MQ2') {
+      this.getMetrics();
+    } else if (notification == 'INIT_MQ2') {
+      this.config = payload;
     } else if (notification == 'ALERT_MQ2') {
       this.sendAlert();
     }
-	}
+  }
 });
